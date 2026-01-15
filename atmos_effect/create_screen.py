@@ -8,11 +8,11 @@ from astropy.io import fits
 from astropy.wcs import WCS
 
 sys.path.append("/users/mibianco/codes/sdc3")
-from gain.iono.new_atmospy import NewArScreens
 #from ARatmospy.ArScreens import ArScreens
 from tqdm import tqdm
 
 def simulate_screen(screen_width_metres, r0, bmax, sampling, speed, rate, alpha_mag, num_times, filename, rseed=2023):
+    from gain.iono.new_atmospy import NewArScreens
     """
     Inputs:
     - screen_width_metres (float): self explanatory
