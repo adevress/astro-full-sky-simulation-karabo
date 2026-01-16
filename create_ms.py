@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[ ]:
+# In[2]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -33,7 +33,7 @@ from atmos_effect.create_screen import simulate_TEC
 # ## Parameters & Flags
 # I/O paths and Flag option to switch on/off primary beam effect and ionospheric effect.
 
-# In[ ]:
+# In[3]:
 
 
 path_in = './'
@@ -51,7 +51,7 @@ ION = False
 # ## Define Sky Model
 # Provided that you data are stored in a _*.fits_ file. To create a simple input file look at the script _create_fits.ipynb_
 
-# In[ ]:
+# In[4]:
 
 
 with fits.open(path_in+fname, mode="readonly", memmap=True) as hdulist:
@@ -77,7 +77,7 @@ print(' FoV = %.2f %s' %(FoV.value, FoV.unit))
 print(' RA, DEC = (%.3f, %.3f) %s' %(RA.value, DEC.value, DEC.unit))
 
 
-# In[ ]:
+# In[5]:
 
 
 plt.subplot(projection=w)
@@ -90,7 +90,7 @@ plt.colorbar(label=r'$\delta T_b$ [%s]' %data.unit)
 # RA [deg], Dec [deg], I [Jy], Q [Jy], U [Jy], V [Jy], ref freq [Hz], alpha, rot, maj ax [arcsec], min ax [arcsec], pos angle [deg], object ID
 # 
 
-# In[ ]:
+# In[6]:
 
 
 # get coordinates
@@ -110,7 +110,7 @@ sky_data[:,10] += 2*FoV.to('arcsec').value/Nx
 sky = SkyModel(sky_data)
 
 
-# In[ ]:
+# In[7]:
 
 
 sky.explore_sky(phase_center=[0, -30])#, xlim=[0.1, -0.1], ylim=[-32, -28])
@@ -121,7 +121,7 @@ sky.explore_sky(phase_center=[0, -30])#, xlim=[0.1, -0.1], ylim=[-32, -28])
 #     beam_hdr = fits.getheader(path_beam)## Include Primary Beam Effect
 # <u>Remark:</u> at the moment there is a bug in the OSKAR pipeline when applying the primary beam from a <i>*.fits</i> file.<br>As a quick fix we apply the primary beam by multiply it directly the sky model (created with <a href="https://everybeam.readthedocs.io/en/latest/">EveryBeam</a> library)
 
-# In[ ]:
+# In[8]:
 
 
 if(PBEAM):
@@ -135,7 +135,7 @@ if(PBEAM):
     data *= smooth_primary_beam
 
 
-# In[ ]:
+# In[9]:
 
 
 #TODO: unset value
@@ -147,7 +147,7 @@ if(PBEAM):
 
 # ## Setup the Observation
 
-# In[ ]:
+# In[10]:
 
 
 #telescope = Telescope.read_OSKAR_tm_file(path_telescope)
@@ -182,7 +182,7 @@ simulation = InterferometerSimulation(
                                         noise_enable=False)
 
 
-# In[ ]:
+# In[11]:
 
 
 telescope.plot_telescope()
