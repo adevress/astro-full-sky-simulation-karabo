@@ -37,7 +37,7 @@ from atmos_effect.create_screen import simulate_TEC
 
 
 path_in = './'
-path_out = '/output/'
+path_out = './output/'
 
 path_telescope = '/store/ska/sk05/mibianco/telescope.tm'
 
@@ -177,7 +177,7 @@ observation_settings = Observation(phase_centre_ra_deg=RA.value,
 # ms_file_path=run_name+'.MS',
 #vis_path=run_name+'.vis',
 simulation = InterferometerSimulation(
-                                        use_gpus=False, use_dask=False,
+                                        use_gpus=True, use_dask=False,
                                         channel_bandwidth_hz=dfreq.value,
                                         noise_enable=False)
 
